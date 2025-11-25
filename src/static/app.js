@@ -872,7 +872,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.documentElement.setAttribute("data-theme", "dark");
       themeIcon.textContent = "☀️";
     } else {
-      document.documentElement.setAttribute("data-theme", "light");
+      document.documentElement.removeAttribute("data-theme");
       themeIcon.textContent = "🌙";
     }
   }
@@ -880,7 +880,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function toggleTheme() {
     const currentTheme = document.documentElement.getAttribute("data-theme");
     if (currentTheme === "dark") {
-      document.documentElement.setAttribute("data-theme", "light");
+      document.documentElement.removeAttribute("data-theme");
       localStorage.setItem("theme", "light");
       themeIcon.textContent = "🌙";
     } else {
