@@ -542,10 +542,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // Create share buttons HTML
     const shareButtonsHtml = `
       <div class="share-buttons">
-        <a href="${shareUrls.facebook}" target="_blank" rel="noopener noreferrer" class="share-button facebook" title="Share on Facebook">f</a>
-        <a href="${shareUrls.twitter}" target="_blank" rel="noopener noreferrer" class="share-button twitter" title="Share on X (Twitter)">𝕏</a>
-        <a href="${shareUrls.linkedin}" target="_blank" rel="noopener noreferrer" class="share-button linkedin" title="Share on LinkedIn">in</a>
-        <a href="${shareUrls.email}" class="share-button email" title="Share via Email">✉</a>
+        <a href="${shareUrls.facebook}" target="_blank" rel="noopener noreferrer" class="share-button facebook" title="Share on Facebook" aria-label="Share on Facebook">f</a>
+        <a href="${shareUrls.twitter}" target="_blank" rel="noopener noreferrer" class="share-button twitter" title="Share on X (Twitter)" aria-label="Share on X (Twitter)">𝕏</a>
+        <a href="${shareUrls.linkedin}" target="_blank" rel="noopener noreferrer" class="share-button linkedin" title="Share on LinkedIn" aria-label="Share on LinkedIn">in</a>
+        <a href="${shareUrls.email}" class="share-button email" title="Share via Email" aria-label="Share via Email">✉</a>
       </div>
     `;
 
