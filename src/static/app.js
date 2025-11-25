@@ -363,6 +363,23 @@ document.addEventListener("DOMContentLoaded", () => {
     return "academic";
   }
 
+  // Function to generate social share URLs
+  function generateShareUrls(activityName, description, schedule) {
+    const pageUrl = window.location.origin;
+    const shareText = `Check out ${activityName} at Mergington High School! ${description} Schedule: ${schedule}`;
+    const encodedText = encodeURIComponent(shareText);
+    const encodedUrl = encodeURIComponent(pageUrl);
+    const emailSubject = encodeURIComponent(`Join ${activityName} at Mergington High School!`);
+    const emailBody = encodeURIComponent(`I wanted to share this activity with you:\n\n${activityName}\n${description}\nSchedule: ${schedule}\n\nCheck it out at: ${pageUrl}`);
+
+    return {
+      facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}&quote=${encodedText}`,
+      twitter: `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`,
+      linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
+      email: `mailto:?subject=${emailSubject}&body=${emailBody}`
+    };
+  }
+
   // Function to fetch activities from API with optional day and time filters
   async function fetchActivities() {
     // Show loading skeletons first
@@ -499,6 +516,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // Format the schedule using the new helper function
     const formattedSchedule = formatSchedule(details);
 
+    // Generate share URLs for social sharing buttons
+    const shareUrls = generateShareUrls(name, details.description, formattedSchedule);
+
     // Create activity tag
     const tagHtml = `
       <span class="activity-tag" style="background-color: ${typeInfo.color}; color: ${typeInfo.textColor}">
@@ -516,6 +536,16 @@ document.addEventListener("DOMContentLoaded", () => {
           <span>${takenSpots} enrolled</span>
           <span>${spotsLeft} spots left</span>
         </div>
+      </div>
+    `;
+
+    // Create share buttons HTML
+    const shareButtonsHtml = `
+      <div class="share-buttons">
+        <a href="${shareUrls.facebook}" target="_blank" rel="noopener noreferrer" class="share-button facebook" title="Share on Facebook">f</a>
+        <a href="${shareUrls.twitter}" target="_blank" rel="noopener noreferrer" class="share-button twitter" title="Share on X (Twitter)">𝕏</a>
+        <a href="${shareUrls.linkedin}" target="_blank" rel="noopener noreferrer" class="share-button linkedin" title="Share on LinkedIn">in</a>
+        <a href="${shareUrls.email}" class="share-button email" title="Share via Email">✉</a>
       </div>
     `;
 
@@ -569,6 +599,7 @@ document.addEventListener("DOMContentLoaded", () => {
         `
         }
       </div>
+      ${shareButtonsHtml}
     `;
 
     // Add click handlers for delete buttons
